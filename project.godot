@@ -1,0 +1,23 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; though you can edit it manually here.
+
+config_version=5
+
+[application]
+
+config/name="HeroCoinRush-2D"
+run/main_scene="res://Main.tscn"
+config/features=PackedStringArray("4.3", "Mobile")
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+window/handheld/orientation=1
+
+[rendering]
+
+renderer/rendering_method="mobile"
