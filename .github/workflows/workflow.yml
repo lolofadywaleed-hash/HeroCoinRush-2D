@@ -12,29 +12,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Godot + Android export templates
-        run: |
-          set -e
-          mkdir -p /home/runner/godot /home/runner/.local/share/godot/export_templates/4.3.stable
-
-          # Download Godot Linux binary
-          cd /tmp
-          curl -L -o godot.zip https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
-          unzip -o -q godot.zip -d /home/runner/godot
-          chmod +x /home/runner/godot/Godot_v4.3-stable_linux.x86_64
-
-          # Download Android export templates
-          curl -L -o /tmp/export_templates.tpz https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export.tpz
-          unzip -o -q /tmp/export_templates.tpz -d /tmp/templates
-          cp /tmp/templates/android_debug.apk /home/runner/.local/share/godot/export_templates/4.3.stable/
-          cp /tmp/templates/android_release.apk /home/runner/.local/share/godot/export_templates/4.3.stable/
-
-          echo "GODOT_PATH=/home/runner/godot/Godot_v4.3-stable_linux.x86_64" >> $GITHUB_ENV
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.3
+          export-templates: true
 
       - name: Export APK
         run: |
           mkdir -p build
-          /home/runner/godot/Godot_v4.3-stable_linux.x86_64 --headless --export-release "Android" build/hero.apk
+          godot --headless --export-release "Android" build/hero.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
