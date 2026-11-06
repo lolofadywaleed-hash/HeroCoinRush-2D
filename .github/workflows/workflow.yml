@@ -18,6 +18,15 @@ jobs:
           version: 4.3.0
           export-templates: true
 
+      - name: Locate export templates
+        run: |
+          echo "=== Searching for android_debug.apk ==="
+          find /home/runner -name "android_debug.apk" 2>/dev/null || echo "NOT FOUND"
+          echo "=== export_templates dir ==="
+          ls -laR /home/runner/.local/share/godot/export_templates/ 2>/dev/null || echo "No export_templates dir"
+          echo "=== godot config dir ==="
+          ls -la /home/runner/.local/share/godot/ 2>/dev/null || echo "No godot dir"
+
       - name: Export APK
         run: |
           mkdir -p build
