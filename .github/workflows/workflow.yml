@@ -17,7 +17,15 @@ jobs:
         with:
           version: 4.3.0
           use-dotnet: false
-          export-templates: true
+
+      - name: Install Android export templates
+        run: |
+          mkdir -p /home/runner/.local/share/godot/export_templates/4.3.stable
+          cd /tmp
+          wget -q https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export.tpz
+          unzip -o -q Godot_v4.3-stable_export.tpz -d templates
+          cp templates/android_debug.apk /home/runner/.local/share/godot/export_templates/4.3.stable/
+          cp templates/android_release.apk /home/runner/.local/share/godot/export_templates/4.3.stable/
 
       - name: Export APK
         run: |
