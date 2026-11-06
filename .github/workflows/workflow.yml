@@ -16,19 +16,7 @@ jobs:
         uses: chickensoft-games/setup-godot@v2
         with:
           version: 4.3.0
-          use-dotnet: false
-
-      - name: Install Android export templates
-        run: |
-          set -x
-          mkdir -p /home/runner/.local/share/godot/export_templates/4.3.stable
-          cd /tmp
-          curl -L -o Godot_v4.3-stable_export.tpz https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export.tpz
-          file Godot_v4.3-stable_export.tpz
-          unzip -o -q Godot_v4.3-stable_export.tpz -d templates
-          find templates -name "*.apk" -type f
-          cp templates/android_debug.apk /home/runner/.local/share/godot/export_templates/4.3.stable/
-          cp templates/android_release.apk /home/runner/.local/share/godot/export_templates/4.3.stable/
+          export-templates: true
 
       - name: Export APK
         run: |
