@@ -30,9 +30,7 @@ jobs:
           export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
 
           # Accept licenses
-          mkdir -p $ANDROID_SDK_ROOT/licenses
-          echo "24333f8a63b6823ea92a8c87da8bf88d87c92033" > $ANDROID_SDK_ROOT/licenses/android-sdk-license
-          echo "84831b9409646a918e30573bab4c9c91346d8abd" > $ANDROID_SDK_ROOT/licenses/android-sdk-preview-license
+          yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
 
           # Install components
           sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "build-tools;33.0.2" "platforms;android-33"
